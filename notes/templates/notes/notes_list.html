@@ -1,9 +1,15 @@
+{% load static %}
+
+
 <html>
+    <head>
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    </head>
     <h1>These are the notes:</h1>
 
     <ul>
         {% for note in notes %} <!-- Everything between curly brackets is django template language logic-->
-            <li>{{note.title}}</li>
+            <li class="note-li">{{note.title}}</li>
         {% endfor %}    
     </ul>
 </html>
