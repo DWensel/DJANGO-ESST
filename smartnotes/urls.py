@@ -20,4 +20,5 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('home.urls')),
+    path('smart/', include('notes.urls')), # Including 'smart/' here means that the url will include /smart/ before urls in notes
 ]
