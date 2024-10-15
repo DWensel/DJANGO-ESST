@@ -7,6 +7,6 @@ from django.contrib.auth.decorators import login_required
 def home(request):
     return render(request, 'home/welcome.html', {'today': datetime.today()})
 
-@login_required(login_url='/admin')
+@login_required(login_url='/admin') # If the user is not logged in, redirect to login_url
 def authorized(request):
     return render(request, 'home/authorized.html',{})
