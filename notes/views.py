@@ -1,8 +1,15 @@
 from django.shortcuts import render
 from django.http import Http404
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from .models import Notes
 from .forms import NotesForm
+
+# The update view is a copy of the createview, just needs its own URL path
+class NotesUpdateView(UpdateView):
+    model = Notes
+    form_class = NotesForm
+    success_url = '/smart/notes'
+
 
 class NotesCreateView(CreateView):
     model = Notes # so the endpoint understands what its regarding to
