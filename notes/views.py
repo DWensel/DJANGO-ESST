@@ -1,15 +1,22 @@
 from django.shortcuts import render
 from django.http import Http404
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.views.generic.edit import DeleteView
 from .models import Notes
 from .forms import NotesForm
+
+# Only needs the model and success url (and in our case the template name), then a URL path
+class NotesDeleteView(DeleteView):
+    model = Notes
+    success_url = '/smart/notes'
+    template_name = 'notes/notes_delete.html' # notes/notes_confirm_delete.html is expected but we can pass our own if we don't want to rename our template
+
 
 # The update view is a copy of the createview, just needs its own URL path
 class NotesUpdateView(UpdateView):
     model = Notes
     form_class = NotesForm
     success_url = '/smart/notes'
-
 
 class NotesCreateView(CreateView):
     model = Notes # so the endpoint understands what its regarding to
