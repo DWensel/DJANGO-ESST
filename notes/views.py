@@ -2,10 +2,11 @@ from django.shortcuts import render
 from django.http import Http404
 from django.views.generic import ListView, DetailView, CreateView
 from .models import Notes
+from .forms import NotesForm
 
 class NotesCreateView(CreateView):
     model = Notes # so the endpoint understands what its regarding to
-    fields = ['title', 'text'] # Fields of the model that the user is allowed to fill
+    form_class = NotesForm # Fields of the model that the user is allowed to fill, now inside of a forms.py file
     success_url = '/smart/notes' # Redirect them to the list so they can see the note they just created in the list
 
 class NotesListView(ListView):
