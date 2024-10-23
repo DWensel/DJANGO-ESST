@@ -11,15 +11,16 @@ from django.shortcuts import redirect
 
 
 class SignupView(CreateView):
-    from_class = UserCreationForm
-    template_name = '/home/register.html'
+    model = User
+    form_class = UserCreationForm
+    template_name = 'home/register.html'
     success_url = '/smart/notes'
 
     # Override the get function
     def get(self, request, *args, **kwargs): 
-        if self.request.user.is_authenticated:
-            return redirect('notes.list')
-        return super().get(request, *args, **kwargs)
+        if self.request.user.is_authenticated: # Checks if the user is already logged in
+            return redirect('notes.list') 
+        return super().get(request, *args, **kwargs) # This line is what GET already does
 
 
 class LogoutInterfaceView(LogoutView):
