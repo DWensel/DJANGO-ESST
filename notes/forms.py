@@ -16,8 +16,11 @@ class NotesForm(forms.ModelForm):
             'text': 'Write your thoughts here:'
         }
 
+    # I have this commented out for now just so I don't have to include Django in the title of new or edited notes.
+    """
     def clean_title(self):
         title = self.cleaned_data['title'] # Clean data is returned by the form, here it will be the same value the user passed
         if 'Django' not in title:
             raise ValidationError('We only accept notes about Django!')
         return title
+    """
