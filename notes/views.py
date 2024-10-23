@@ -26,10 +26,11 @@ class NotesCreateView(LoginRequiredMixin, CreateView):
     form_class = NotesForm # Fields of the model that the user is allowed to fill, now inside of a forms.py file
     success_url = '/smart/notes' # Redirect them to the list so they can see the note they just created in the list
 
+    # If the form is valid it will perform this. 
     def form_valid(self, form):
-        self.object = form.save(commit=False) # First get the object
-        self.object.user = self.request.user # Fill the object, in this case the user
-        self.object.save()
+        self.object = form.save(commit=False) # First create the object without trying to save to the database (because we would get an error)
+        self.object.user = self.request.user # Fill the missing object parameter we need, in this case it's the user who is the author
+        self.object.save() # Now save the object in the database with the user attached. 
         return HttpResponseRedirect(self.get_success_url())
     
 
